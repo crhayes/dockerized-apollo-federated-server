@@ -1,18 +1,26 @@
 const { ApolloServer, gql } = require("apollo-server");
+const { buildFederatedSchema } = require("@apollo/federation");
 
 const typeDefs = gql`
   type Query {
-    name: String
+    products: [String]
   }
 `;
 
 const resolvers = {
   Query: {
-    name: () => "Chris Hayes"
+    products: () => ["Computers", "Phones", "Games"]
   }
 };
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({
+  schema: buildFederatedSchema([
+    {
+      typeDefs,
+      resolvers
+    }
+  ])
+});
 
 // The `listen` method launches a web server.
 server.listen({ port: 3000 }).then(({ url }) => {

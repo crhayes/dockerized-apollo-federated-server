@@ -4,7 +4,13 @@
       "path": "."
     },
     {
+      "path": "accounts"
+    },
+    {
       "path": "api"
+    },
+    {
+      "path": "products"
     }
   ]
 }
